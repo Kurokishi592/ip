@@ -2,7 +2,7 @@ public class Kurokishi {
     public static void main(String[] args) {
         String name = "Kurokishi";
         String logo =
-                " _  __  \n"
+                        " _  __  \n"
                         + "| |/ /  \n"
                         + "| ' /   \n"
                         + "| . \\   \n"
