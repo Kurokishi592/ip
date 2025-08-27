@@ -1,18 +1,19 @@
 import java.util.Scanner;
 
-/**
- * Kurokishi is a simple command-line chatbot that echoes user commands until the user types "bye".
- * It displays a logo and prompts the user for input.
- */
-
 public class Kurokishi {
-    // this array stores the commands input by user
-    private static String[] commandList = new String[100];
+
+    // A simple array to store tasks
+    private static String[] taskList = new String[100];
 
     public static void main(String[] args) {
         String name = "Kurokishi";
         String dashLine ="------------------------------------------------------------";
-        String promptCommand = "Please type something:) ";
+        String promptCommand = ("Simply type your task to add to a list\n" +
+                        "Type 'list' to see your tasks\n" +
+                        "Type 'mark <task number>' to mark a task as done\n" +
+                        "Type 'unmark <task number>' to unmark a task as not done\n" +
+                        "Type 'bye' to exit the program\n"
+        );
         String logo =
                         " _  __  \n"
                         + "| |/ /  \n"
@@ -35,33 +36,58 @@ public class Kurokishi {
                         + "| |__| | \n"
                         + " \\____/  \n";
         System.out.println(logo);
-        System.out.println("Hello! I'm " + name);
-        System.out.println("What can I do for you?");
-        System.out.println(dashLine);
+        System.out.println("Hello! I'm " + name +"\n" +
+                "I can help you keep track of your tasks!\n");
         System.out.println(promptCommand);
+        System.out.println(dashLine);
 
-        // Echos commands by the user until the user types "bye".
+        // Perform Task Tracking
         Scanner in = new Scanner(System.in);
-        String command;
-        int commandCount = 0;
+        int taskIndex = 0;
+        String input;
         do {
-            command = in.nextLine();
-            if (!command.equals("bye")) {
+            input = in.nextLine();
+            if (!input.equals("bye")) {
                 System.out.println(dashLine);
-                if (command.equals("list")) {
-                    for (int i = 0; i < commandCount; i++) {
-                        System.out.println((i + 1) + ". " + commandList[i]);
+
+                if (input.equals("list")) {
+                    System.out.println("Here are the tasks in your list:");
+                    for (int i = 0; i < taskIndex; i++) {
+                        System.out.println((i + 1) + ". " + taskList[i]);
+                    }
+                }
+                else if (input.startsWith("mark ") || input.startsWith("unmark ")) {
+                    String[] parts = input.split(" ");
+                    int taskNumber = Integer.parseInt(parts[1]) - 1; // index zero stuff
+                    if (taskNumber >= 0 && taskNumber < taskIndex) {
+                        String taskToMark = taskList[taskNumber];
+                        Task t = new Task(taskToMark.substring(4)); // Skip status icon and space
+                        if (input.startsWith("mark ")) {
+                            t.setDone(true);
+                            System.out.println("    Nice! I've marked this task as done:");
+                        } else {
+                            t.setDone(false);
+                            System.out.println("    OK, I've marked this task as not done yet:");
+                        }
+                        taskList[taskNumber] = t.getStatusIcon() + " " + t.description;
+                        System.out.println("    " + taskList[taskNumber]);
+                    } else {
+                        System.out.println("    Invalid task number.");
                     }
                 }
                 else {
-                    commandList[commandCount] = command;
-                    System.out.println("    added: " + command);
-                    commandCount++;
+                    Task t = new Task(input);
+                    String task = t.getStatusIcon() + " " + t.description;
+                    taskList[taskIndex] = task;
+                    System.out.println("    added: " + task);
+                    taskIndex++;
                 }
+
                 System.out.println(dashLine);
+                System.out.println("Done! Now,\n");
                 System.out.println(promptCommand);
             }
-        } while (!command.equals("bye"));
+        } while (!input.equals("bye"));
         System.out.println(dashLine);
         System.out.println("Bye. Hope to see you again soon!");
         System.out.println(dashLine);
