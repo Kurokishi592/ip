@@ -15,7 +15,7 @@ public class Task {
         return (isDone ? "[X]" : "[ ]"); // return tick or X symbols
     }
 
-    public void setDone(boolean status) {
-        this.isDone = status;
+    public void setDone(boolean isMark) {
+        this.isDone = isMark;
     }
 }

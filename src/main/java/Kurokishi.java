@@ -14,8 +14,7 @@ public class Kurokishi {
                         "Type 'unmark <task number>' to unmark a task as not done\n" +
                         "Type 'bye' to exit the program\n"
         );
-        String logo =
-                        " _  __  \n"
+        String logo = " _  __  \n"
                         + "| |/ /  \n"
                         + "| ' /   \n"
                         + "| . \\   \n"
@@ -37,7 +36,7 @@ public class Kurokishi {
                         + " \\____/  \n";
         System.out.println(logo);
         System.out.println("Hello! I'm " + name +"\n" +
-                "I can help you keep track of your tasks!\n");
+                    "I can help you keep track of your tasks!\n");
         System.out.println(promptCommand);
         System.out.println(dashLine);
 
@@ -74,8 +73,7 @@ public class Kurokishi {
                     } else {
                         System.out.println("    Invalid task number.");
                     }
-                }
-                else {
+                } else {
                     Task t = new Task(input);
                     String task = t.getStatusIcon() + " " + t.description;
                     taskList[taskIndex] = task;
