@@ -1,3 +1,7 @@
+/*
+ * Inherits a task with added [T] tag
+ */
+
 public class Todo extends Task {
     public Todo(String description) {
         super(description);
@@ -5,7 +9,7 @@ public class Todo extends Task {
 
     @Override
     public String toString() {
-        return "[T]" + getStatusIcon() + " " + description;
+        return "[T]" + super.toString();
     }   
     
 }
