@@ -6,14 +6,16 @@ public class Kurokishi {
     private static final String DASH_LINE ="------------------------------------------------------------";
     private static final String NAME = "Kurokishi";
     private static final String PROMPT_COMMAND = (
-            "Simply type your task to add to a list\n" +
-            "Type 'list' to see your tasks\n" +
-            "Type 'mark <task number>' to mark a task as done\n" +
-            "Type 'unmark <task number>' to unmark a task as not done\n" +
-            "Type 'todo <description>' to add a todo task\n" +
-            "Type 'deadline <description> /by <date/time>' to add a deadline task\n" +
-            "Type 'event <description> /from <day/time> /to <day/time>' to add an event task\n" +
-            "Type 'bye' to exit the program\n"
+            ">> SYSTEM DIRECTIVE: Awaiting your command...\n" + 
+            ">>     Use 'add <description>' to register a new item.\n" +
+            ">>     Use 'list' to review all stored records.\n" +
+            ">>     Use 'mark <task number>' to confirm task completion.\n" +
+            ">>     Use 'unmark <task number>' to revoke completion status.\n" +
+            ">>     Use 'todo <description>' to log a standard task.\n" +
+            ">>     Use 'deadline <description> /by <date/time>' to establish a time-bound objective.\n" +
+            ">>     Use 'event <description> /from <start> /to <end>' to schedule an occurrence.\n" +
+            ">>     Use 'bye' to terminate the current connection.\n" +
+            ">> SYSTEM DIRECTIVE: Standing by for your command.\n"
     );
 
     // A simple array to store tasks
@@ -37,12 +39,15 @@ public class Kurokishi {
 
             // Exit the program upon "bye" command
             if (command.equals("bye")) {
-                System.out.println("Bye. Hope to see you again soon!");
+                System.out.println("[SYSTEM NOTICE] Session concluded. Probability of future contact: high. Glory to Humanity.");
                 printDashLine();
                 break;
             }
             
             switch (command) {
+                case "add":
+                    taskIndex = handleAdd(parts[1], taskIndex);
+                    break;
                 case "list":
                     printTaskList(taskIndex);
                     break;
@@ -61,7 +66,10 @@ public class Kurokishi {
                     taskIndex = handleEvent(parts, taskIndex);
                     break;
                 default:
-                    taskIndex = handleDefault(input, taskIndex);
+                    System.out.println("    [ERROR] Unrecognized command: '" + input + "'.");
+                    System.out.println("    [SYSTEM NOTICE] Please use a valid command word:" +
+                            "    (known commands by Humanity: add, list, mark, unmark, todo, deadline, event, bye).\n" +
+                            "    [SYSTEM NOTICE] User to follow instructions more carefully in future.");
                     break;
             }
 
@@ -97,7 +105,8 @@ public class Kurokishi {
     }
 
     private static void printBotIntro() {
-        System.out.println("Hello! I'm " + NAME +"\n" + "I can help you keep track of your tasks!\n");
+        System.out.println("Unit " + NAME + " activated.\n" +
+                "My role is to support you in organizing your tasks.\n");
     }
     private static void printDashLine() {
         System.out.println(DASH_LINE);
@@ -108,11 +117,11 @@ public class Kurokishi {
     }
 
     private static void printDone() {
-        System.out.println("Done! Now,\n");
+        System.out.println("[SYSTEM NOTICE] Ready for next command. Glory to Humanity!\n");
     }
     
     private static void printTaskList(int taskIndex) {
-        System.out.println("Here are the tasks in your list:");
+        System.out.println("[SYSTEM NOTICE] Compiling list of active tasks:");
         for (int i = 0; i < taskIndex; i++) {
             System.out.println((i + 1) + ". " + taskList[i]);
         }
@@ -121,7 +130,7 @@ public class Kurokishi {
     private static void handleMarkUnmark(String[] parts, String command, int taskIndex) {
         // Handle unexpected input
         if (parts.length < 2) {
-            System.out.println("    Please specify a task number.");
+            System.out.println("    [ERROR] Please specify a task number.");
             return;
         }
         try {
@@ -130,81 +139,81 @@ public class Kurokishi {
                 boolean isMark = command.equals("mark");
                 taskList[taskNumber].setDone(isMark);
                 if (isMark) {
-                    System.out.println("    Nice! I've marked this task as done:");
+                    System.out.println("    [SYSTEM UPDATE] Task status: marked as complete.");
                 } else {
-                    System.out.println("    OK, I've marked this task as not done yet:");
+                    System.out.println("    [SYSTEM UPDATE] Task status: reverted to incomplete.");
                 }
                 System.out.println("    " + taskList[taskNumber]);
             } else {
-                System.out.println("    Invalid task number.");
+                System.out.println("    [ERROR] Input does not match valid task index.");
             }
         } catch (NumberFormatException e) {
-            System.out.println("    Invalid task number format");
+            System.out.println("    [ERROR] Invalid task number format");
         }
     }
 
     private static int handleTodo(String[] parts, int taskIndex) {
         if (parts.length < 2) {
-            System.out.println("    Please specify a todo description.");
+            System.out.println("    [ERROR] Missing todo task description.");
             return taskIndex;
         }
         if (taskIndex >= MAX_TASKS) {
-            System.out.println("    Task list is full.");
+            System.out.println("    [SYSTEM WARNING] Memory capacity exceeded. Task list full.");
             return taskIndex;
         }
         Todo todoTask = new Todo(parts[1].trim()); // get rid of the space used to split too
         taskList[taskIndex] = todoTask;
-        System.out.println("    Got it. I've added this todo task:\n " + "         " + todoTask);
+        System.out.println("    [SYSTEM NOTICE] Todo task added successfully.\n " + "         " + todoTask);
         taskIndex++;
-        System.out.println("    Now you have " + taskIndex + " tasks in the list.");
+        System.out.println("    [STATUS] Current number of active tasks: " + taskIndex);
         return taskIndex;
     }
 
     private static int handleDeadline(String[] parts, int taskIndex) {
         if (parts.length < 2 || !parts[1].contains(" /by ")) {
-            System.out.println("    Please specify a deadline description and time using '/by'.");
+            System.out.println("    [ERROR] Please specify a deadline description and time using '/by'.");
             return taskIndex;
         }
         if (taskIndex >= MAX_TASKS) {
-            System.out.println("    Task list is full.");
+            System.out.println("    [SYSTEM WARNING] Memory capacity exceeded. Task list full.");
             return taskIndex;
         }
         String[] deadlineParts = parts[1].split(" /by ", 2);
         Deadline deadlineTask = new Deadline(deadlineParts[0].trim(), deadlineParts[1].trim());
         taskList[taskIndex] = deadlineTask;
-        System.out.println("    Got it. I've added this deadline task:\n " + "         " + deadlineTask);
+        System.out.println("    [SYSTEM NOTICE] Deadline task added successfully.\n " + "         " + deadlineTask);
         taskIndex++;
-        System.out.println("    Now you have " + taskIndex + " tasks in the list.");
+        System.out.println("    [STATUS] Current number of active tasks: " + taskIndex);
         return taskIndex;
     }
 
     private static int handleEvent(String[] parts, int taskIndex) {
         if (parts.length < 2 || !parts[1].contains(" /from ") || !parts[1].contains(" /to ")) {
-            System.out.println("    Please specify an event description, start time using '/from' and end time using '/to'.");
+            System.out.println("    [ERROR] Please specify an event description, start time using '/from' and end time using '/to'.");
             return taskIndex;
         }
         if (taskIndex >= MAX_TASKS) {
-            System.out.println("    Task list is full.");
+            System.out.println("    [SYSTEM WARNING] Memory capacity exceeded. Task list full.");
             return taskIndex;
         }
         String[] eventParts1 = parts[1].split(" /from ", 2);
         String[] eventParts2 = eventParts1[1].split(" /to ", 2);
         Event eventTask = new Event(eventParts1[0].trim(), eventParts2[0].trim(), eventParts2[1].trim());
         taskList[taskIndex] = eventTask;
-        System.out.println("    Got it. I've added this event task:\n " + "         " + eventTask);
+        System.out.println("    [SYSTEM NOTICE] Event task added successfully.\n " + "         " + eventTask);
         taskIndex++;
-        System.out.println("    Now you have " + taskIndex + " tasks in the list.");
+        System.out.println("    [STATUS] Current number of active tasks: " + taskIndex);
         return taskIndex;
     }
 
-    private static int handleDefault(String input, int taskIndex) {
+    private static int handleAdd(String input, int taskIndex) {
         if (taskIndex >= MAX_TASKS) {
-            System.out.println("    Task list is full.");
+            System.out.println("    [SYSTEM WARNING] Memory capacity exceeded. Task list full.");
             return taskIndex;
         }
         Task t = new Task(input);
         taskList[taskIndex] = t;
-        System.out.println("    added: " + t);
+        System.out.println("    [SYSTEM NOTICE] Item has been registered in memory: " + t);
         taskIndex++;
         return taskIndex;
     }
