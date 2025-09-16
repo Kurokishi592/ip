@@ -1,7 +1,7 @@
 package kurokishi.exception;
 
-public class KurokishiException extends Exception {
-    public KurokishiException(String message) {
+public class InputException extends Exception {
+    public InputException(String message) {
         super(message);
     }
 }
