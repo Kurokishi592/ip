@@ -20,15 +20,27 @@ public class Parser {
         String commandWord = parts[0];
 
         switch (commandWord) {
-            case "add": return new AddCommand(parts);
-            case "list": return new ListCommand();
-            case "mark": return new MarkCommand(parts);
-            case "unmark": return new UnmarkCommand(parts);
-            case "todo": return new TodoCommand(parts);
-            case "deadline": return new DeadlineCommand(parts);
-            case "event": return new EventCommand(parts);
-            case "bye": return new ExitCommand();
-            default: throw new InputException("Unrecognized command: " + input);
+            case "add":
+                return new AddCommand(parts.length > 1 ? parts[1] : "");
+            case "list":
+                return new ListCommand();
+            case "mark":
+                return new MarkCommand(parts.length > 1 ? parts[1] : "", true);
+            case "unmark":
+                return new MarkCommand(parts.length > 1 ? parts[1] : "", false);
+            case "todo":
+                return new TodoCommand(parts.length > 1 ? parts[1] : "");
+            case "deadline":
+                return new DeadlineCommand(parts.length > 1 ? parts[1] : "");
+            case "event":
+                return new EventCommand(parts.length > 1 ? parts[1] : "");
+            case "bye":
+                return new ExitCommand();
+            default: 
+                throw new InputException("    [ERROR] Unrecognized command: '" + input + "'.\n" +   
+                        "    [SYSTEM NOTICE] Please use a valid command word:" +
+                        "    (known commands by Humanity: add, list, mark, unmark, todo, deadline, event, bye).\n" +
+                        "    [SYSTEM NOTICE] User to follow instructions more carefully in future.");
         }
     }
 }

@@ -15,14 +15,12 @@ public class TaskList {
     private static final int MAX_TASKS = 100;
     private final ArrayList<Task> tasks = new ArrayList<>();
 
-
     public void add(Task task) throws InputException {
         if (tasks.size() >= MAX_TASKS) {
             throw new InputException("    [SYSTEM WARNING] Memory capacity exceeded. Task list full.");
         }
         tasks.add(task);
     }
-
 
     public Task get(int index) throws InputException {
         if (index < 0 || index >= tasks.size()) {
@@ -32,11 +30,9 @@ public class TaskList {
         return tasks.get(index);
     }
 
-
     public int size() {
         return tasks.size();
     }
-
 
     public List<Task> all() {
         return tasks;

@@ -46,7 +46,7 @@ public class Kurokishi {
             ui.printDone();
         }
     }
-
+}
     // private static final int MAX_TASKS = 100;
     // private static final String DASH_LINE ="------------------------------------------------------------";
     // private static final String NAME = "Kurokishi";
@@ -190,82 +190,82 @@ public class Kurokishi {
     //     }
     // }
 
-    private static void handleMarkUnmark(String[] parts, String command, int taskIndex) throws InputException {
-        // Handle unexpected input
-        if (parts.length < 2) {
-            throw new InputException("    [ERROR] Please specify a task number.\n" +
-                    "    [SYSTEM NOTICE] Usage: " + command + " <task number>");
-        }
-        try {
-            int taskNumber = Integer.parseInt(parts[1]) - 1; // indexed zero 
-            if (taskNumber < 0 || taskNumber >= taskIndex) {
-                throw new InputException("    [ERROR] Input does not match valid task index.\n" +
-                        "    [SYSTEM NOTICE] Use 'list' to view valid task numbers.");
-            }
-            boolean isMark = command.equals("mark");
-            taskList[taskNumber].setDone(isMark);
-            if (isMark) {
-                System.out.println("    [SYSTEM UPDATE] Task status: marked as complete.");
-            } else {
-                System.out.println("    [SYSTEM UPDATE] Task status: reverted to incomplete.");
-            }
-            System.out.println("    " + taskList[taskNumber]);
-        } catch (NumberFormatException e) {
-            throw new InputException("    [ERROR] Invalid task number format\n" +
-                    "    [SYSTEM NOTICE] Task number must be an integer.");
-        }
-    }
+    // private static void handleMarkUnmark(String[] parts, String command, int taskIndex) throws InputException {
+    //     // Handle unexpected input
+    //     if (parts.length < 2) {
+    //         throw new InputException("    [ERROR] Please specify a task number.\n" +
+    //                 "    [SYSTEM NOTICE] Usage: " + command + " <task number>");
+    //     }
+    //     try {
+    //         int taskNumber = Integer.parseInt(parts[1]) - 1; // indexed zero 
+    //         if (taskNumber < 0 || taskNumber >= taskIndex) {
+    //             throw new InputException("    [ERROR] Input does not match valid task index.\n" +
+    //                     "    [SYSTEM NOTICE] Use 'list' to view valid task numbers.");
+    //         }
+    //         boolean isMark = command.equals("mark");
+    //         taskList[taskNumber].setDone(isMark);
+    //         if (isMark) {
+    //             System.out.println("    [SYSTEM UPDATE] Task status: marked as complete.");
+    //         } else {
+    //             System.out.println("    [SYSTEM UPDATE] Task status: reverted to incomplete.");
+    //         }
+    //         System.out.println("    " + taskList[taskNumber]);
+    //     } catch (NumberFormatException e) {
+    //         throw new InputException("    [ERROR] Invalid task number format\n" +
+    //                 "    [SYSTEM NOTICE] Task number must be an integer.");
+    //     }
+    // }
 
-    private static int handleTodo(String[] parts, int taskIndex) throws InputException {
-        if (parts.length < 2 || parts[1].trim().isEmpty()) {
-            throw new InputException("    [ERROR] Missing todo task description.\n" +
-                    "    [SYSTEM NOTICE] Usage: todo <description>");
-        }
-        if (taskIndex >= MAX_TASKS) {
-            throw new InputException("    [SYSTEM WARNING] Memory capacity exceeded. Task list full.");
-        }
-        Todo todoTask = new Todo(parts[1].trim()); // get rid of the space used to split too
-        taskList[taskIndex] = todoTask;
-        System.out.println("    [SYSTEM NOTICE] Todo task added successfully.\n " + "         " + todoTask);
-        taskIndex++;
-        System.out.println("    [STATUS] Current number of active tasks: " + taskIndex);
-        return taskIndex;
-    }
+    // private static int handleTodo(String[] parts, int taskIndex) throws InputException {
+    //     if (parts.length < 2 || parts[1].trim().isEmpty()) {
+    //         throw new InputException("    [ERROR] Missing todo task description.\n" +
+    //                 "    [SYSTEM NOTICE] Usage: todo <description>");
+    //     }
+    //     if (taskIndex >= MAX_TASKS) {
+    //         throw new InputException("    [SYSTEM WARNING] Memory capacity exceeded. Task list full.");
+    //     }
+    //     Todo todoTask = new Todo(parts[1].trim()); // get rid of the space used to split too
+    //     taskList[taskIndex] = todoTask;
+    //     System.out.println("    [SYSTEM NOTICE] Todo task added successfully.\n " + "         " + todoTask);
+    //     taskIndex++;
+    //     System.out.println("    [STATUS] Current number of active tasks: " + taskIndex);
+    //     return taskIndex;
+    // }
 
-    private static int handleDeadline(String[] parts, int taskIndex) throws InputException {
-        if (parts.length < 2 || !parts[1].contains(" /by ")) {
-            throw new InputException("    [ERROR] Please specify a deadline description and time using '/by'.\n" +
-                    "    [SYSTEM NOTICE] Usage: deadline <description> /by <date/time>");
-        }
-        if (taskIndex >= MAX_TASKS) {
-            throw new InputException("    [SYSTEM WARNING] Memory capacity exceeded. Task list full.");
-        }
-        String[] deadlineParts = parts[1].split(" /by ", 2);
-        Deadline deadlineTask = new Deadline(deadlineParts[0].trim(), deadlineParts[1].trim());
-        taskList[taskIndex] = deadlineTask;
-        System.out.println("    [SYSTEM NOTICE] Deadline task added successfully.\n " + "         " + deadlineTask);
-        taskIndex++;
-        System.out.println("    [STATUS] Current number of active tasks: " + taskIndex);
-        return taskIndex;
-    }
+    // private static int handleDeadline(String[] parts, int taskIndex) throws InputException {
+    //     if (parts.length < 2 || !parts[1].contains(" /by ")) {
+    //         throw new InputException("    [ERROR] Please specify a deadline description and time using '/by'.\n" +
+    //                 "    [SYSTEM NOTICE] Usage: deadline <description> /by <date/time>");
+    //     }
+    //     if (taskIndex >= MAX_TASKS) {
+    //         throw new InputException("    [SYSTEM WARNING] Memory capacity exceeded. Task list full.");
+    //     }
+    //     String[] deadlineParts = parts[1].split(" /by ", 2);
+    //     Deadline deadlineTask = new Deadline(deadlineParts[0].trim(), deadlineParts[1].trim());
+    //     taskList[taskIndex] = deadlineTask;
+    //     System.out.println("    [SYSTEM NOTICE] Deadline task added successfully.\n " + "         " + deadlineTask);
+    //     taskIndex++;
+    //     System.out.println("    [STATUS] Current number of active tasks: " + taskIndex);
+    //     return taskIndex;
+    // }
 
-    private static int handleEvent(String[] parts, int taskIndex) throws InputException {
-        if (parts.length < 2 || !parts[1].contains(" /from ") || !parts[1].contains(" /to ")) {
-        throw new InputException("    [ERROR] Please specify an event description, start time using '/from' and end time using '/to'.\n" +
-                "    [SYSTEM NOTICE] Usage: event <description> /from <start> /to <end>");
-        }
-        if (taskIndex >= MAX_TASKS) {
-            throw new InputException("    [SYSTEM WARNING] Memory capacity exceeded. Task list full.");
-        }
-        String[] eventParts1 = parts[1].split(" /from ", 2);
-        String[] eventParts2 = eventParts1[1].split(" /to ", 2);
-        Event eventTask = new Event(eventParts1[0].trim(), eventParts2[0].trim(), eventParts2[1].trim());
-        taskList[taskIndex] = eventTask;
-        System.out.println("    [SYSTEM NOTICE] Event task added successfully.\n " + "         " + eventTask);
-        taskIndex++;
-        System.out.println("    [STATUS] Current number of active tasks: " + taskIndex);
-        return taskIndex;
-    }
+    // private static int handleEvent(String[] parts, int taskIndex) throws InputException {
+    //     if (parts.length < 2 || !parts[1].contains(" /from ") || !parts[1].contains(" /to ")) {
+    //     throw new InputException("    [ERROR] Please specify an event description, start time using '/from' and end time using '/to'.\n" +
+    //             "    [SYSTEM NOTICE] Usage: event <description> /from <start> /to <end>");
+    //     }
+    //     if (taskIndex >= MAX_TASKS) {
+    //         throw new InputException("    [SYSTEM WARNING] Memory capacity exceeded. Task list full.");
+    //     }
+    //     String[] eventParts1 = parts[1].split(" /from ", 2);
+    //     String[] eventParts2 = eventParts1[1].split(" /to ", 2);
+    //     Event eventTask = new Event(eventParts1[0].trim(), eventParts2[0].trim(), eventParts2[1].trim());
+    //     taskList[taskIndex] = eventTask;
+    //     System.out.println("    [SYSTEM NOTICE] Event task added successfully.\n " + "         " + eventTask);
+    //     taskIndex++;
+    //     System.out.println("    [STATUS] Current number of active tasks: " + taskIndex);
+    //     return taskIndex;
+    // }
 
 //     private static int handleAdd(String input, int taskIndex) throws InputException {
 //         if (input.trim().isEmpty()) {
