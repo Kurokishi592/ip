@@ -1,3 +1,5 @@
+package kurokishi.task;
+
 /*
  * Inherits a task with added [T] tag
  */
