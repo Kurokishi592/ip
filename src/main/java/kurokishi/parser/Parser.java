@@ -22,6 +22,8 @@ public class Parser {
         switch (commandWord) {
             case "add":
                 return new AddCommand(parts.length > 1 ? parts[1] : "");
+            case "delete":
+                return new DeleteCommand(parts.length > 1 ? parts[1] : "");
             case "list":
                 return new ListCommand();
             case "mark":

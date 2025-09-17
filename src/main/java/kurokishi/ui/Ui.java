@@ -12,6 +12,7 @@ public class Ui {
     );
     private static final String PROMPT_COMMAND = (">> SYSTEM DIRECTIVE: Awaiting your command...\n" + 
             ">>     Use 'add <description>' to register a new item.\n" +
+            ">>     Use 'delete <task number>' to trash a memory.\n" +
             ">>     Use 'list' to review all stored records.\n" +
             ">>     Use 'mark <task number>' to confirm task completion.\n" +
             ">>     Use 'unmark <task number>' to revoke completion status.\n" +

@@ -22,6 +22,13 @@ public class TaskList {
         tasks.add(task);
     }
 
+    public void remove(Task task) throws InputException {
+        if (tasks.size() == 0) {
+            throw new InputException("    [SYSTEM WARNING] Memory is blank. Nothing to erase");
+        }
+        tasks.remove(task);
+    }
+
     public Task get(int index) throws InputException {
         if (index < 0 || index >= tasks.size()) {
             throw new InputException("    [ERROR] Input does not match valid task index.\n" +
