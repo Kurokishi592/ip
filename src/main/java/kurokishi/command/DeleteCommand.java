@@ -1,7 +1,6 @@
 package kurokishi.command;
 
 import kurokishi.task.TaskList;
-import kurokishi.task.Event;
 import kurokishi.task.Task;
 import kurokishi.exception.InputException;
 import kurokishi.ui.Ui;
@@ -23,6 +22,11 @@ public class DeleteCommand implements Command {
             int index = Integer.parseInt(deleteString.trim()) - 1;
             Task t = tasks.get(index);
             tasks.remove(t);
+            try {
+                tasks.saveTasks();
+            } catch (Exception e) {
+                throw new InputException("    [ERROR] Failed to save task status: " + e.getMessage());
+            }
             ui.printMessage("    [SYSTEM NOTICE] Event task deleted successfully.\n " + "         " + t);
             ui.printMessage("    [STATUS] Current number of active tasks: " + tasks.size());
         }

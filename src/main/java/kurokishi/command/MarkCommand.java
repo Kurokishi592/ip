@@ -2,6 +2,7 @@ package kurokishi.command;
 
 import kurokishi.task.TaskList;
 import kurokishi.exception.InputException;
+import kurokishi.exception.StorageException;
 import kurokishi.ui.Ui;
 
 public class MarkCommand implements Command {

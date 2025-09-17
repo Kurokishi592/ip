@@ -7,7 +7,6 @@ import kurokishi.command.Command;
 import kurokishi.exception.*;
 import kurokishi.data.Storage;
 
-
 import java.util.Scanner;
 
 public class Kurokishi {
