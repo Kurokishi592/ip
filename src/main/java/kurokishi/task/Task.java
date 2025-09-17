@@ -21,15 +21,15 @@ public class Task {
         this.isDone = isMark;
     }
 
-    public String toString() {
-        return getStatusIcon() + " " + description;
-    }
-
     public String getDescription() {
         return description;
     }
 
-    public String getisDone() {
-        return isDone ? "1" : "0";
+    public boolean getIsDone() {
+        return isDone;
+    }
+
+    public String toString() {
+        return getStatusIcon() + " " + description;
     }
 }

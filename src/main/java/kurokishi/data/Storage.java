@@ -4,7 +4,6 @@ import kurokishi.task.*;
 import kurokishi.exception.*;
 
 import java.io.File;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -25,7 +24,7 @@ public class Storage {
     }
 
     /** Load tasks from the file */
-    public List<Task> loadFromFile() throws InputException {
+    public List<Task> loadFromFile() throws StorageException {
         List<Task> tasks = new ArrayList<>();
         File f = new File(filePath); // create a File for the given file path
 
@@ -54,7 +53,7 @@ public class Storage {
     }
 
     /** Save all tasks to file (overwrite) */
-    public void save(List<Task> tasks) throws InputException {
+    public void writeToFile(List<Task> tasks) throws StorageException {
         try {
             FileWriter writer = new FileWriter(filePath); // overwrite
             for (Task t : tasks) {
@@ -66,11 +65,11 @@ public class Storage {
         }
     }
 
-    /** Convert file line into corresponding Task object */
-    private Task parseLine(String line) throws InputException {
+    /** Convert file line into corresponding Task object and check if file is currupted */
+    private Task parseLine(String line) throws StorageException {
         String[] parts = line.split(" \\| ");
         if (parts.length < 3) {
-            throw new InputException("[ERROR] Invalid task format: " + line);
+            throw new StorageException("[ERROR] Corrupted. Invalid task format: " + line);
         }
 
         String type = parts[0];
@@ -88,39 +87,44 @@ public class Storage {
                 return todo;
             case "D":
                 if (parts.length != 4) {
-                    throw new InputException("[ERROR] Invalid deadline format: " + line);
+                    throw new StorageException("[ERROR] Corrupted. Invalid deadline format: " + line);
                 }
                 Deadline d = new Deadline(description, parts[3]);
                 d.setDone(done);
                 return d;
             case "E":
                 if (parts.length != 4) {
-                    throw new InputException("[ERROR] Invalid event format: " + line);
+                    throw new StorageException("[ERROR] Corrupted. Invalid event format: " + line);
                 }
-                // format for time is from: time to: time, need to split to get time
-                if (!parts[3].contains("from:") || !parts[3].contains("to:")) {
-                    throw new InputException("[ERROR] Invalid event time format: " + line);
+                // format for time in .txt is time - time
+                if (!parts[3].contains("-")) {
+                    throw new StorageException("[ERROR] Corrupted. Invalid event time format: " + line);
                 }
-                String[] fromTime = parts[3].split("from:");
-                String[] toTime = fromTime[1].split("to:");
-                Event e = new Event(description, fromTime[1].trim(), toTime[1].trim());
+                String[] timeRange = parts[3].split(" - ");
+                if (timeRange.length != 2) {
+                    throw new StorageException("[ERROR] Corrupted. Invalid event time format: " + line);
+                }
+                Event e = new Event(description, timeRange[0].trim(), timeRange[1].trim());
                 e.setDone(done);
                 return e;
             default:
-                throw new InputException("[ERROR] Unknown task type: " + type);
+                throw new StorageException("[ERROR] Corrupted. Unknown task type: " + type);
         }
     }
 
     /** Convert Task object into a file line */
     private String serializeTask(Task t) {
-        String done = t.isDone() ? "1" : "0";
-        if (t instanceof Todo) return "T | " + done + " | " + t.getDescription();
-        else if (t instanceof Deadline) {
+        String done = t.getIsDone() ? "1" : "0";
+        if (t instanceof Todo) {
+            return "T | " + done + " | " + t.getDescription();
+        } else if (t instanceof Deadline) {
             Deadline d = (Deadline) t;
             return "D | " + done + " | " + d.getDescription() + " | " + d.getBy();
         } else if (t instanceof Event) {
             Event e = (Event) t;
             return "E | " + done + " | " + e.getDescription() + " | " + e.getFrom() + " - " + e.getTo();
-        } else return "T | " + done + " | " + t.getDescription(); // fallback
+        } else {
+            return "N | " + done + " | " + t.getDescription();
+        }
     }
 }
