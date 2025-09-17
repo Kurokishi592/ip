@@ -21,6 +21,14 @@ public class Task {
         this.isDone = isMark;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public boolean getIsDone() {
+        return isDone;
+    }
+
     public String toString() {
         return getStatusIcon() + " " + description;
     }

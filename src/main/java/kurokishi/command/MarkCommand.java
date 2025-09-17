@@ -22,6 +22,11 @@ public class MarkCommand implements Command {
         try {
             int index = Integer.parseInt(taskString.trim()) - 1;
             tasks.get(index).setDone(mark);
+            try {
+                tasks.saveTasks();
+            } catch (Exception e) {
+                throw new InputException("    [ERROR] Failed to save task status: " + e.getMessage());
+            }
             if (mark) {
                 ui.printMessage("    [SYSTEM UPDATE] Task status: marked as complete.");
             } else {
