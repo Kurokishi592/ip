@@ -11,30 +11,30 @@ public class Parser {
         if (input == null) {
             throw new InputException("    [ERROR] Empty input! Please provide an input.");
         }
-        String trimmed = input.trim();
-        if (trimmed.isEmpty()) {
+        if (input.trim().isEmpty()) {
             throw new InputException("    ERROR] Empty command. Please enter a command.");
         }
         String[] parts = input.trim().split(" ", 2);
         String commandWord = parts[0];
+        String args = parts.length > 1 ? parts[1] : "";
 
         switch (commandWord) {
             case "add":
-                return new AddCommand(parts.length > 1 ? parts[1] : "");
+                return new AddCommand(args);
             case "delete":
-                return new DeleteCommand(parts.length > 1 ? parts[1] : "");
+                return new DeleteCommand(args);
             case "list":
                 return new ListCommand();
             case "mark":
-                return new MarkCommand(parts.length > 1 ? parts[1] : "", true);
+                return new MarkCommand(args, true);
             case "unmark":
-                return new MarkCommand(parts.length > 1 ? parts[1] : "", false);
+                return new MarkCommand(args, false);
             case "todo":
-                return new TodoCommand(parts.length > 1 ? parts[1] : "");
+                return new TodoCommand(args);
             case "deadline":
-                return new DeadlineCommand(parts.length > 1 ? parts[1] : "");
+                return new DeadlineCommand(args);
             case "event":
-                return new EventCommand(parts.length > 1 ? parts[1] : "");
+                return new EventCommand(args);
             case "bye":
                 return new ExitCommand();
             default: 
