@@ -20,11 +20,21 @@ public class Storage {
 
     private final String filePath;
 
+    /**
+     * Creates a Storage bound to a file path.
+     *
+     * @param filePath Path of the data file.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }   
 
-    /** Load tasks from the file */
+    /**
+     * Loads tasks from the file system.
+     *
+     * @return List of tasks loaded.
+     * @throws StorageException If reading or parsing fails.
+     */
     public List<Task> loadFromFile() throws StorageException {
         List<Task> tasks = new ArrayList<>();
         File f = new File(filePath); // create a File for the given file path
@@ -53,7 +63,12 @@ public class Storage {
         return tasks;
     }
 
-    /** Save all tasks to file (overwrite) */
+    /**
+     * Save all tasks to file (overwrite)
+     *
+     * @param tasks List of tasks to save.
+     * @throws StorageException If writing fails.
+     */
     public void writeToFile(List<Task> tasks) throws StorageException {
         try {
             FileWriter writer = new FileWriter(filePath); // overwrite
@@ -66,7 +81,12 @@ public class Storage {
         }
     }
 
-    /** Convert file line into corresponding Task object and check if file is currupted */
+    /**
+     * Convert file line into corresponding Task object and check if file is currupted
+     * 
+     * @param line Line from the data file.
+     * @return Corresponding Task object.
+     */
     private Task parseLine(String line) throws StorageException {
         String[] parts = line.split(" \\| ");
         if (parts.length < 3) {
@@ -116,7 +136,12 @@ public class Storage {
         }
     }
 
-    /** Convert Task object into a file line */
+    /** 
+     * Convert Task object into a file line
+     *
+     * @param t Task object to serialize.
+     * @return String representation for file storage.
+     */
     private String serializeTask(Task t) {
         String done = t.getIsDone() ? "1" : "0";
         if (t instanceof Todo) {

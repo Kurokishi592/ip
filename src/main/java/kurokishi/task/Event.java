@@ -17,16 +17,33 @@ public class Event extends Task{
     public LocalDateTime from;
     public LocalDateTime to;
 
+    /**
+     * Creates an event.
+     *
+     * @param description Task description.
+     * @param from Start date/time.
+     * @param to End date/time.
+     */
     public Event(String description, LocalDateTime from, LocalDateTime to) {
         super(description);
         this.from = from;
         this.to = to;
     }
 
+    /**
+     * Returns the start date/time.
+     *
+     * @return Start moment.
+     */
     public LocalDateTime getFrom() {
         return from;
     }
 
+    /**
+     * Returns the end date/time.
+     *
+     * @return End moment.
+     */
     public LocalDateTime getTo() {
         return to;
     }
@@ -37,12 +54,22 @@ public class Event extends Task{
                 : dt.format(DISPLAY_DATETIME);
     }
 
+    /**
+     * Returns the storage string for this event.
+     *
+     * @return Encoded string.
+     */
     public String toFileString() {
         return "E | " + (isDone ? "1" : "0") + " | " + description
                 + " | " + from.format(STORE)
                 + " | " + to.format(STORE);
     }
 
+    /**
+     * Returns the display string for this event.
+     *
+     * @return Display string.
+     */
     @Override
     public String toString() {
         return "[E]" + super.toString()

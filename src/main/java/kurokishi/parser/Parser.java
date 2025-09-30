@@ -4,9 +4,17 @@ import kurokishi.command.*;
 import kurokishi.exception.InputException;
 
 /**
- * Handles all user command line inputs for the Kurokishi chatbot.
+ * Handles all user raw command line strings into commands for the Kurokishi chatbot.
  */
 public class Parser {
+
+    /**
+     * Parses a line of user input.
+     *
+     * @param input Raw input line.
+     * @return Command instance to execute.
+     * @throws InputException If input is empty or command is unknown.
+     */
     public static Command parse(String input) throws InputException {
         if (input == null) {
             throw new InputException("    [ERROR] Empty input! Please provide an input.");

@@ -11,6 +11,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /*
+ * Command to add a deadline task.
  * Parses args and creates a Deadline with date or date-time.
  * Accepted inputs: yyyy-MM-dd or yyyy-MM-dd HHmm after '/by'.
  */
@@ -18,10 +19,22 @@ public class DeadlineCommand implements Command {
     private final String deadlineString;
     private static final DateTimeFormatter DATE_TIME = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
 
+    /**
+     * Creates a DeadlineCommand.
+     *
+     * @param deadlineString Raw argument string after the keyword.
+     */
     public DeadlineCommand(String deadlineString) { 
         this.deadlineString = deadlineString; 
     }
 
+    /**
+     * Parses a date or date-time string.
+     *
+     * @param s Input string (yyyy-MM-dd or yyyy-MM-dd HHmm).
+     * @return Parsed LocalDateTime (date-only maps to midnight).
+     * @throws InputException If parsing fails.
+     */    
     private LocalDateTime parseFlexibleDateTime(String s) throws InputException {
         try {
             // Try full date-time
@@ -38,6 +51,14 @@ public class DeadlineCommand implements Command {
         }
     }
 
+    /**
+     * Parses arguments and adds a deadline.
+     *
+     * @param tasks Task list to add to.
+     * @param ui UI handler for output.
+     * @return False to continue running.
+     * @throws InputException If arguments are missing or invalid.
+     */
     @Override
     public boolean execute(TaskList tasks, Ui ui) throws InputException {
         String[] deadlineParts = deadlineString.split(" /by ", 2);

@@ -5,13 +5,29 @@ import kurokishi.task.Task;
 import kurokishi.exception.InputException;
 import kurokishi.ui.Ui;
 
+/**
+ * Command to delete a task by index.
+ */
 public class DeleteCommand implements Command {
     private final String deleteString;
 
+    /**
+     * Creates a DeleteCommand.
+     *
+     * @param deleteString Task index as string.
+     */
     public DeleteCommand(String deleteString) { 
         this.deleteString = deleteString; 
     }
 
+    /**
+     * Deletes a task at the given index.
+     *
+     * @param tasks Task list to modify.
+     * @param ui UI handler for output.
+     * @return False to continue running.
+     * @throws InputException If index is invalid.
+     */
     @Override
     public boolean execute(TaskList tasks, Ui ui) throws InputException {
         if (deleteString == null || deleteString.trim().isEmpty()) {

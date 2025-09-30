@@ -1,19 +1,33 @@
 package kurokishi.command;
 
-
 import kurokishi.task.TaskList;
 import kurokishi.task.Todo;
 import kurokishi.exception.InputException;
 import kurokishi.ui.Ui;
 
-
+/**
+ * Command to add a todo task.
+ */
 public class TodoCommand implements Command {
     private final String todoString;
 
-    public TodoCommand(String todoString) { 
-        this.todoString = todoString; 
+    /**
+     * Creates a TodoCommand.
+     *
+     * @param todoString Todo task description.
+     */
+    public TodoCommand(String todoString) {
+        this.todoString = todoString;
     }
 
+    /**
+     * Adds a todo task with the provided description.
+     *
+     * @param tasks Task list to add to.
+     * @param ui UI handler for output.
+     * @return False to continue running.
+     * @throws InputException If description is missing.
+     */
     @Override
     public boolean execute(TaskList tasks, Ui ui) throws InputException {
         if (todoString == null || todoString.trim().isEmpty()) {

@@ -26,6 +26,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Adds a task.
+     *
+     * @param task Task to add.
+     */
     public void add(Task task) throws InputException {
         if (tasks.size() >= MAX_TASKS) {
             throw new InputException("    [SYSTEM WARNING] Memory capacity exceeded. Task list full.");
@@ -38,6 +43,13 @@ public class TaskList {
         }
     }
 
+        /**
+     * Removes a task at a 1-based index.
+     *
+     * @param task Task to remove.
+     * @return Removed task.
+     * @throws InputException If task is not found.
+     */
     public void remove(Task task) throws InputException {
         if (tasks.size() == 0) {
             throw new InputException("    [SYSTEM WARNING] Memory is blank. Nothing to erase");
@@ -46,7 +58,10 @@ public class TaskList {
     }
 
     /**
-     * Returns tasks whose descriptions contain the keyword (case-insensitive).
+     * Finds tasks whose descriptions contain a keyword (case-insensitive).
+     *
+     * @param keyword Keyword to search.
+     * @return Matching tasks.
      */
     public List<Task> find(String keyword) {
         String k = keyword.toLowerCase();
@@ -59,6 +74,13 @@ public class TaskList {
         return result;
     }
 
+    /**
+     * Retrieves a task at a 0-based index.
+     *
+     * @param index Index of the task.
+     * @return Task at the index.
+     * @throws InputException If index is invalid.
+     */
     public Task get(int index) throws InputException {
         if (index < 0 || index >= tasks.size()) {
             throw new InputException("    [ERROR] Input does not match valid task index.\n" +
@@ -67,14 +89,29 @@ public class TaskList {
         return tasks.get(index);
     }
 
+    /**
+     * Returns the number of tasks.
+     *
+     * @return Number of tasks.
+     */
     public int size() {
         return tasks.size();
     }
 
+    /**
+     * Returns all tasks.
+     *
+     * @return List of all tasks.
+     */
     public List<Task> all() {
         return tasks;
     }
 
+    /**
+     * Saves the current tasks to storage.
+     *
+     * @throws StorageException If saving fails.
+     */
     public void saveTasks() throws StorageException {
         try {
             storage.writeToFile(tasks);
