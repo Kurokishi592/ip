@@ -18,6 +18,7 @@ public class Ui {
             ">>     Use 'todo <description>' to log a standard task.\n" +
             ">>     Use 'deadline <description> /by <yyyy-MM-dd HHmm>' to establish a time-bound objective.\n" +
             ">>     Use 'event <description> /from <yyyy-MM-dd HHmm> /to <yyyy-MM-dd HHmm>' to schedule an occurrence.\n" +
+            ">>     Use 'find <keyword>' to search your records.\n" +
             ">>     Use 'bye' to terminate the current connection.\n" +
             ">> SYSTEM DIRECTIVE: Standing by for your command.\n"
     );
