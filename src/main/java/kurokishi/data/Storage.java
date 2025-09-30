@@ -1,7 +1,7 @@
 package kurokishi.data;
 
 import kurokishi.task.*;
-import kurokishi.exception.*;
+import kurokishi.exception.StorageException;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -11,17 +11,16 @@ import java.util.List;
 import java.util.Scanner;
 
 /*
- * Save.java save the tasks in the hard disk automaitically whenever the task list changes
+ * Storage class saves the tasks in the hard disk automatically whenever the task list changes
  * and load the tasks from the hard disk when the program starts
  */
-
 public class Storage {
 
     private final String filePath;
 
     public Storage(String filePath) {
         this.filePath = filePath;
-    }
+    }   
 
     /** Load tasks from the file */
     public List<Task> loadFromFile() throws StorageException {
@@ -30,7 +29,7 @@ public class Storage {
 
         try {
             if (!f.exists()) {
-                // make sure parent directory exists
+                // create parent directory if it doesn't exist
                 File parent = f.getParentFile();
                 if (parent != null) {
                     parent.mkdirs();

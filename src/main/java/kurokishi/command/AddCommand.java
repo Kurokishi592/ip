@@ -20,7 +20,7 @@ public class AddCommand implements Command {
         }
         Normal t = new Normal(input.trim());
         tasks.add(t);
-        ui.printMessage("    [SYSTEM NOTICE] Item has been registered in memory: " + t);
+        ui.showMessage("    [SYSTEM NOTICE] Item has been registered in memory: " + t);
         return false;
     }
 }

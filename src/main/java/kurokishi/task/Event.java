@@ -3,7 +3,6 @@ package kurokishi.task;
 /*
  * Inherits a task with added [E] tag  and a from and to (event duration)
  */
-
 public class Event extends Task{
     public String from;
     public String to;

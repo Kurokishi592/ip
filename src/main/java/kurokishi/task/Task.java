@@ -2,8 +2,8 @@ package kurokishi.task;
 
 /**
  * Represents a task with a description and completion status.
+ * Superclass for all task types in the Kurokishi system.
  */
-
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -13,8 +13,13 @@ public class Task {
         this.isDone = false;
     }
 
+    /**
+     * Gets the visual indicator of task completion status.
+     * 
+     * @return "X" if completed, " " if not completed
+     */
     public String getStatusIcon() {
-        return (isDone ? "[X]" : "[ ]"); // return tick or X symbols
+        return (isDone ? "[X]" : "[ ]");
     }
 
     public void setDone(boolean isMark) {

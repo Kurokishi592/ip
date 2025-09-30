@@ -3,8 +3,6 @@ package kurokishi.task;
 /*
  * Inherits a task with added [D] tag  and a by (deadline)
  */
-
-
 public class Deadline extends Task {
     protected String by;
 

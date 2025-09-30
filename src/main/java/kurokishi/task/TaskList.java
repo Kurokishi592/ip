@@ -1,19 +1,16 @@
 package kurokishi.task;
 
-
 import kurokishi.exception.InputException;
 import kurokishi.exception.StorageException;
 import kurokishi.data.Storage;
-
 
 import java.util.ArrayList;
 import java.util.List;
 
 /*
- * TaskList.java manages the tasks storage. It supports adding, retrieving tasks and getting the size of the list.
+ * TaskList class manages the tasks storage. It supports adding, retrieving tasks and getting the size of the list.
  * It also enforces a maximum capacity of 100 tasks.
  */
-
 public class TaskList {
     private final ArrayList<Task> tasks = new ArrayList<>();
     private static final int MAX_TASKS = 100;

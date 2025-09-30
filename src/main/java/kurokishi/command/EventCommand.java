@@ -22,8 +22,8 @@ public class EventCommand implements Command {
         String[] eventParts2 = eventParts1[1].split(" /to ", 2);
         Event eventTask = new Event(eventParts1[0].trim(), eventParts2[0].trim(), eventParts2[1].trim());
         tasks.add(eventTask);
-        ui.printMessage("    [SYSTEM NOTICE] Event task added successfully.\n " + "         " + eventTask);
-        ui.printMessage("    [STATUS] Current number of active tasks: " + tasks.size());
+        ui.showMessage("    [SYSTEM NOTICE] Event task added successfully.\n " + "         " + eventTask);
+        ui.showMessage("    [STATUS] Current number of active tasks: " + tasks.size());
         return false;
     }
 }

@@ -1,9 +1,8 @@
 package kurokishi.ui;
 
 /*
- * Ui.java handles all printing
+ * Ui class handles all printing
  */
-
 public class Ui {
     private static final String DASH_LINE ="------------------------------------------------------------";
     private static final String NAME = "Kurokishi";
@@ -46,36 +45,37 @@ public class Ui {
             + " \\____/  \n"
     );
 
-
-    public void printLogo() {
-        System.out.println(KUROKISHI_LOGO);
-    }
-
-    public void printBotIntro() {
-        System.out.println(BOT_INTRO);
-    }
-
-    public void printPrompt() {
-        System.out.println(PROMPT_COMMAND);
-    }
-
-    public void printDash() {
+    public void showDash() {
         System.out.println(DASH_LINE);
     }
 
-    public void printMessage(String msg) {
+    public void showLogo() {
+        System.out.println(KUROKISHI_LOGO);
+    }
+
+    public void showBotIntro() {
+        System.out.println(BOT_INTRO);
+    }
+
+    public void showPrompt() {
+        System.out.println(PROMPT_COMMAND);
+    }
+
+    public void showMessage(String msg) {
         System.out.println(msg);
     }
 
-    public void printError(String msg) {
+    public void showError(String msg) {
         System.out.println(msg);
     }
 
-    public void printDone() {
+    public void showDone() {
+        showDash();
         System.out.println(DONE_COMMAND);
     }
 
-    public void printEnd() {
+    public void showEnd() {
         System.out.println(END_COMMAND);
+        showDash();
     }
 }

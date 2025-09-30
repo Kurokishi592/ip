@@ -22,8 +22,8 @@ public class TodoCommand implements Command {
         }
         Todo todo = new Todo(todoString.trim());
         tasks.add(todo);
-        ui.printMessage("    [SYSTEM NOTICE] Todo task added successfully.\n " + "         " + todo);
-        ui.printMessage("    [STATUS] Current number of active tasks: " + tasks.size());
+        ui.showMessage("    [SYSTEM NOTICE] Todo task added successfully.\n " + "         " + todo);
+        ui.showMessage("    [STATUS] Current number of active tasks: " + tasks.size());
         return false;
     }
 }

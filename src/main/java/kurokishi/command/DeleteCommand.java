@@ -27,8 +27,8 @@ public class DeleteCommand implements Command {
             } catch (Exception e) {
                 throw new InputException("    [ERROR] Failed to save task status: " + e.getMessage());
             }
-            ui.printMessage("    [SYSTEM NOTICE] Event task deleted successfully.\n " + "         " + t);
-            ui.printMessage("    [STATUS] Current number of active tasks: " + tasks.size());
+            ui.showMessage("    [SYSTEM NOTICE] Event task deleted successfully.\n " + "         " + t);
+            ui.showMessage("    [STATUS] Current number of active tasks: " + tasks.size());
         }
         catch (NumberFormatException e) {
             throw new InputException("    [ERROR] Invalid task number format\n" +

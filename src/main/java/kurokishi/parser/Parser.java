@@ -3,10 +3,9 @@ package kurokishi.parser;
 import kurokishi.command.*;
 import kurokishi.exception.InputException;
 
-/*
- * Parser.java parses commands. i.e. turns input into commands
+/**
+ * Handles all user command line inputs for the Kurokishi chatbot.
  */
-
 public class Parser {
     public static Command parse(String input) throws InputException {
         if (input == null) {

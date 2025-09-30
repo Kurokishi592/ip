@@ -21,8 +21,8 @@ public class DeadlineCommand implements Command {
         String[] deadlineParts = deadlineString.split(" /by ", 2);
         Deadline deadlineTask = new Deadline(deadlineParts[0].trim(), deadlineParts[1].trim());
         tasks.add(deadlineTask);
-        ui.printMessage("    [SYSTEM NOTICE] Deadline task added successfully.\n " + "         " + deadlineTask);
-        ui.printMessage("    [STATUS] Current number of active tasks: " + tasks.size());
+        ui.showMessage("    [SYSTEM NOTICE] Deadline task added successfully.\n " + "         " + deadlineTask);
+        ui.showMessage("    [STATUS] Current number of active tasks: " + tasks.size());
         return false;
     }
 }
