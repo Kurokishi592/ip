@@ -43,20 +43,23 @@ Kurokishi is a **command-line chatbot** that helps you manage tasks quickly from
 
 3. Launch Kurokishi using either of these 3 methods:
 
+
 | VSCode                                                                                                                                                                       | Intellij                                                                                                                                                                                                                                                                                                                                                                                              | Terminal                                                                                                                                 |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
 | - Open the project folder in VS Code.<br><br>- Open the file `src/main/java/kurokishi/Kurokishi.java`.<br><br>- Run the main method using “Run” or the code lens above main. | 1. Open the project into Intellij as follows:<br><br>   1. Click `Open`.<br><br>   2. Select the project directory, and click `OK`.<br><br>   3. If there are any further prompts, accept the defaults.<br><br>2. Locate the `src/main/java/kurokishi/Kurokishi.java` file, right-click it, and choose `Run Kurokishi.main()` (if the code editor is showing compile errors, try restarting the IDE). | Open a command terminal, cd into the folder you put the jar file in, and use the java -jar Kurokishi.jar command to run the application. |
 
 
->[!Note] Tasks are saved automatically to `data/tasks.txt` in the `ip` folder.
+>[!TIP] 
+> Tasks are saved automatically to `data/tasks.txt` in the `ip` folder.
 > Every valid command will save the task immediately and automatically.
 
 Witness the bootup of Kurokishi, which should display the following in your terminal:
-![Screenshot of Kurokishi's startup](/ip/docs/startup.png)
+[Screenshot of Kurokishi's startup](/ip/docs/startup.png)
 
 4. Type a valid command from this [summary of commands]((#command-summary)) whenever prompted and press Enter to execute it. 
 
 5. Refer to [Features](#features) below for the details of commands available. 
+
 ---
 
 ## Command Summary
@@ -86,7 +89,8 @@ Display:
 
 ## Features
 
->[!tick] Please take note of the format of inputs
+>[!CAUTION] 
+> Please take note of the format of inputs
 > Commands are case insensitive
 > Date format is important
 > Any input that does not follow the required format will throw an error with corresponding prompt to fix
@@ -132,8 +136,8 @@ Sample output:
 [SYSTEM NOTICE] Ready for next command. Glory to Humanity!
 ```
 
->[!tip] 
->Keep descriptions short and specific.
+> [!TIP] 
+> Keep descriptions short and specific.
 
 ---
 
@@ -187,7 +191,7 @@ Sample output:
 [SYSTEM NOTICE] Ready for next command. Glory to Humanity!
 ```
 
->[!note] 
+> [!NOTE] 
 > If you provide a date without time, the time defaults to 00:00 (midnight).
 
 ---
@@ -216,7 +220,7 @@ Sample output:
 [SYSTEM NOTICE] Ready for next command. Glory to Humanity!
 ```
 
->[!note] 
+> [!NOTE] 
 > If you provide a date without time, the time defaults to 00:00 (midnight).
 > the date and time after "to" must be chronologically after the date and time after "from"
 
@@ -293,7 +297,8 @@ Sample output:
 [SYSTEM NOTICE] Ready for next command. Glory to Humanity!
 ```
 
->[!tick] Tasklist will automatically move up the tasks below deleted task upwards
+> [!TIP] 
+> Tasklist will automatically move up the tasks below deleted task upwards
 > to check the indexes of your tasks, it is adviced to `list` once before and after issuing the `delete` command
 
 ---
@@ -355,8 +360,8 @@ E | 0 | meeting | 2025-10-01T09:30 | 2025-10-01T17:30
 E | 0 | trip | 2025-10-01T00:00 - 2025-10-05T00:00
 ```
 
->[!note] 
->`1` means done, `0` means not done.
+> [!NOTE] 
+> `1` means done, `0` means not done.
 
 ---
 
@@ -376,7 +381,7 @@ D | 0 | file taxes | 2025-04-15T00:00
 E | 1 | seminar | 2025-10-10T09:00 - 2025-10-10T12:00
 ```
 
->[!warning] 
+> [!WARNING] 
 > Invalid lines may cause the app to skip tasks or show a “Corrupted data” error.
 > You may need to fully clear the file for the program to work again.
 
