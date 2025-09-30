@@ -108,7 +108,7 @@ public class Storage {
                 }
                 LocalDateTime from = LocalDateTime.parse(timeRange[0].trim());
                 LocalDateTime to = LocalDateTime.parse(timeRange[1].trim());
-                Event e = new Event(description + " (from: " + from + " to: " + to + ")", from, to);
+                Event e = new Event(description, from, to);
                 e.setDone(done);
                 return e;
             default:
