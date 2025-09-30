@@ -15,7 +15,7 @@ public class Parser {
             throw new InputException("    ERROR] Empty command. Please enter a command.");
         }
         String[] parts = input.trim().split(" ", 2);
-        String commandWord = parts[0];
+        String commandWord = parts[0].toLowerCase();
         String args = parts.length > 1 ? parts[1] : "";
 
         switch (commandWord) {
@@ -35,6 +35,8 @@ public class Parser {
                 return new DeadlineCommand(args);
             case "event":
                 return new EventCommand(args);
+            case "find":
+                return new FindCommand(args);
             case "bye":
                 return new ExitCommand();
             default: 

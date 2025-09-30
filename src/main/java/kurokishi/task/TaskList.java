@@ -45,6 +45,20 @@ public class TaskList {
         tasks.remove(task);
     }
 
+    /**
+     * Returns tasks whose descriptions contain the keyword (case-insensitive).
+     */
+    public List<Task> find(String keyword) {
+        String k = keyword.toLowerCase();
+        List<Task> result = new ArrayList<>();
+        for (Task t : tasks) {
+            if (t.getDescription().toLowerCase().contains(k)) {
+                result.add(t);
+            }
+        }
+        return result;
+    }
+
     public Task get(int index) throws InputException {
         if (index < 0 || index >= tasks.size()) {
             throw new InputException("    [ERROR] Input does not match valid task index.\n" +
