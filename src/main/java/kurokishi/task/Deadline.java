@@ -15,11 +15,22 @@ public class Deadline extends Task {
     private static final DateTimeFormatter STORE = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
     public LocalDateTime by;
 
+    /**
+     * Creates a deadline.
+     *
+     * @param description Task description.
+     * @param by Due date/time.
+     */
     public Deadline(String description, LocalDateTime by) {
         super(description);
         this.by = by;
     }
 
+    /**
+     * Returns the due date/time.
+     *
+     * @return Due moment.
+     */
     public LocalDateTime getBy() {
         return by;
     }
@@ -30,11 +41,21 @@ public class Deadline extends Task {
                 : dt.format(DISPLAY_DATETIME);
     }
 
+    /**
+     * Returns the storage string for this deadline.
+     *
+     * @return Encoded string.
+     */
     public String toFileString() {
         // Persist as ISO_LOCAL_DATE_TIME (e.g., 2019-10-15T00:00)
         return "D | " + (isDone ? "1" : "0") + " | " + description + " | " + by.format(STORE);
     }
 
+    /**
+     * Returns the display string for this deadline.
+     *
+     * @return Display string.
+     */
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + formatForDisplay(by) + ")";

@@ -49,6 +49,9 @@ public class Kurokishi {
         this.scanner = new Scanner(System.in);
     }
 
+    /**
+     * Runs the interactive command loop.
+     */
     public void run() {
         ui.showLogo();
         ui.showBotIntro();

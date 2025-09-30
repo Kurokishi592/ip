@@ -11,6 +11,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /*
+ * Command to add an event task with start and end times.
  * Parses args and creates an Event with date or date-time for from/to.
  * Accepted inputs: yyyy-MM-dd or yyyy-MM-dd HHmm after '/from' and '/to'.
  */
@@ -18,10 +19,22 @@ public class EventCommand implements Command {
     private final String eventString;
     private static final DateTimeFormatter DATE_TIME = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
 
+    /**
+     * Creates an EventCommand.
+     *
+     * @param eventString Raw argument string after the keyword.
+     */
     public EventCommand(String eventString) { 
         this.eventString = eventString; 
     }
 
+    /**
+     * Parses a date or date-time string.
+     *
+     * @param s Input string (yyyy-MM-dd or yyyy-MM-dd HHmm).
+     * @return Parsed LocalDateTime (date-only maps to midnight).
+     * @throws InputException If parsing fails.
+     */
     private LocalDateTime parseFlexibleDateTime(String s) throws InputException {
         try {
             return LocalDateTime.parse(s, DATE_TIME);
@@ -36,6 +49,14 @@ public class EventCommand implements Command {
         }
     }
 
+    /**
+     * Parses arguments and adds an event.
+     *
+     * @param tasks Task list to add to.
+     * @param ui UI handler for output.
+     * @return False to continue running.
+     * @throws InputException If arguments are missing or invalid.
+     */
     @Override
     public boolean execute(TaskList tasks, Ui ui) throws InputException {
         if (eventString == null || eventString.trim().isEmpty()) {

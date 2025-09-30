@@ -8,15 +8,28 @@ import kurokishi.ui.Ui;
 import java.util.List;
 
 /*
- * Finds tasks whose descriptions contain the given keyword (case-insensitive).
+ * Command to find tasks whose descriptions contain the given keyword (case-insensitive).
  */
 public class FindCommand implements Command {
     private final String keyword;
 
+    /**
+     * Creates a FindCommand.
+     *
+     * @param keywordString Keyword to search for.
+     */
     public FindCommand(String keywordString) {
         this.keyword = keywordString == null ? "" : keywordString.trim();
     }
 
+    /**
+     * Executes the search and prints matches.
+     *
+     * @param tasks Task list to search.
+     * @param ui UI handler for output.
+     * @return False to continue running.
+     * @throws InputException If keyword is missing.
+     */
     @Override
     public boolean execute(TaskList tasks, Ui ui) throws InputException {
         if (keyword.isEmpty()) {

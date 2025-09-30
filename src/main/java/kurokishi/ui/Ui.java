@@ -1,7 +1,7 @@
 package kurokishi.ui;
 
 /*
- * Ui class handles all printing
+ * Handles user interface output.
  */
 public class Ui {
     private static final String DASH_LINE ="------------------------------------------------------------";
@@ -45,35 +45,63 @@ public class Ui {
             + " \\____/  \n"
     );
 
+    /**
+     * Displays a horizontal dash line.
+     */
     public void showDash() {
         System.out.println(DASH_LINE);
     }
 
+    /**
+     * Displays the Kurokishi logo.
+     */
     public void showLogo() {
         System.out.println(KUROKISHI_LOGO);
     }
 
+    /**
+     * Displays the bot introduction message.
+     */
     public void showBotIntro() {
         System.out.println(BOT_INTRO);
     }
 
+    /**
+     * Displays the command prompt message.
+     */
     public void showPrompt() {
         System.out.println(PROMPT_COMMAND);
     }
 
+    /**
+     * Displays a general message to the user.
+     *
+     * @param msg Message to display.
+     */
     public void showMessage(String msg) {
         System.out.println(msg);
     }
 
+    /**
+     * Displays an error message to the user.
+     *
+     * @param msg Error message to display.
+     */
     public void showError(String msg) {
         System.out.println(msg);
     }
 
+    /**
+     * Displays the done command message.
+     */
     public void showDone() {
         showDash();
         System.out.println(DONE_COMMAND);
     }
 
+    /**
+     * Displays the end command message.
+     */
     public void showEnd() {
         System.out.println(END_COMMAND);
         showDash();

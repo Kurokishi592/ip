@@ -1,13 +1,24 @@
 package kurokishi.task;
 
-/*
- * Inherits a task with added [E] tag  and a from and to (event duration)
+/**
+ * Generic task type with description only.
  */
 public class Normal extends Task{
+    
+    /**
+     * Creates a normal task.
+     *
+     * @param description Task description.
+     */
     public Normal(String description) {
         super(description);
     }
     
+    /**
+     * Returns the storage string for this task.
+     *
+     * @return Encoded string.
+     */
     @Override
     public String toString() {
         return "[N]" + super.toString();
