@@ -54,7 +54,7 @@ Kurokishi is a **command-line chatbot** that helps you manage tasks quickly from
 > Every valid command will save the task immediately and automatically.
 
 Witness the bootup of Kurokishi, which should display the following in your terminal:
-[Screenshot of Kurokishi's startup](/ip/docs/startup.png)
+![Screenshot of Kurokishi's startup](startup.png)
 
 4. Type a valid command from this [summary of commands]((#command-summary)) whenever prompted and press Enter to execute it. 
 
