@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import java.time.LocalDateTime;
+
 /*
  * Storage class saves the tasks in the hard disk automatically whenever the task list changes
  * and load the tasks from the hard disk when the program starts
@@ -88,7 +90,8 @@ public class Storage {
                 if (parts.length != 4) {
                     throw new StorageException("[ERROR] Corrupted. Invalid deadline format: " + line);
                 }
-                Deadline d = new Deadline(description, parts[3]);
+                LocalDateTime by = LocalDateTime.parse(parts[3]);
+                Deadline d = new Deadline(description, by);
                 d.setDone(done);
                 return d;
             case "E":
@@ -103,7 +106,9 @@ public class Storage {
                 if (timeRange.length != 2) {
                     throw new StorageException("[ERROR] Corrupted. Invalid event time format: " + line);
                 }
-                Event e = new Event(description, timeRange[0].trim(), timeRange[1].trim());
+                LocalDateTime from = LocalDateTime.parse(timeRange[0].trim());
+                LocalDateTime to = LocalDateTime.parse(timeRange[1].trim());
+                Event e = new Event(description + " (from: " + from + " to: " + to + ")", from, to);
                 e.setDone(done);
                 return e;
             default:
