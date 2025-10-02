@@ -27,31 +27,31 @@ public class Parser {
         String args = parts.length > 1 ? parts[1] : "";
 
         switch (commandWord) {
-            case "add":
-                return new AddCommand(args);
-            case "delete":
-                return new DeleteCommand(args);
-            case "list":
-                return new ListCommand();
-            case "mark":
-                return new MarkCommand(args, true);
-            case "unmark":
-                return new MarkCommand(args, false);
-            case "todo":
-                return new TodoCommand(args);
-            case "deadline":
-                return new DeadlineCommand(args);
-            case "event":
-                return new EventCommand(args);
-            case "find":
-                return new FindCommand(args);
-            case "bye":
-                return new ExitCommand();
-            default: 
-                throw new InputException("    [ERROR] Unrecognized command: '" + input + "'.\n" +   
-                        "    [SYSTEM NOTICE] Please use a valid command word:" +
-                        "    (known commands by Humanity: add, list, mark, unmark, todo, deadline, event, bye).\n" +
-                        "    [SYSTEM NOTICE] User to follow instructions more carefully in future.");
+        case "add":
+            return new AddCommand(args);
+        case "delete":
+            return new DeleteCommand(args);
+        case "list":
+            return new ListCommand();
+        case "mark":
+            return new MarkCommand(args, true);
+        case "unmark":
+            return new MarkCommand(args, false);
+        case "todo":
+            return new TodoCommand(args);
+        case "deadline":
+            return new DeadlineCommand(args);
+        case "event":
+            return new EventCommand(args);
+        case "find":
+            return new FindCommand(args);
+        case "bye":
+            return new ExitCommand();
+        default: 
+            throw new InputException("    [ERROR] Unrecognized command: '" + input + "'.\n" +   
+                    "    [SYSTEM NOTICE] Please use a valid command word:" +
+                    "    (known commands by Humanity: add, list, mark, unmark, todo, deadline, event, bye).\n" +
+                    "    [SYSTEM NOTICE] User to follow instructions more carefully in future.");
         }
     }
 }
