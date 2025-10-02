@@ -29,9 +29,9 @@ Kurokishi is a **CLI-based chatbot** that helps you manage tasks from your termi
 2. Locate the `src/main/java/kurokishi/Kurokishi.java` file, right-click it, and choose `Run Kurokishi.main()` (if the code editor is showing compile errors, try restarting the IDE).
 
 ### Run from Terminal
-1. Open a command terminal, cd into the folder you put the jar file in, and use the java -jar Kurokishi.jar command to run the application.
+1. Open a command terminal, cd into the folder you put the jar file in, and run `java -jar cs2113_ip.jar` to run the application.
 
-Data is saved automatically to `data/tasks.txt` under the `ip` folder.
+Data is saved automatically to `data/tasks.txt` under the `data` folder.
 
 A successful run will activate Kurokishi with the following display:
 
